@@ -8,8 +8,8 @@ public class Jeu {
 
     }
 
-    public boolean estGagnant(){
-        return false;
+    public boolean estGagnant(Joueur j){
+        return j.getScore()>=25;
     }
 
 }
