@@ -7,10 +7,10 @@ public class Case {
     }
 
     public void ajouterGraines(){
-
+        nbGraines++;
     }
 
     public void enleverToutesGraines(){
-
+        nbGraines = 0;
     }
 }
