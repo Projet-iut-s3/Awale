@@ -8,7 +8,7 @@ public abstract class Joueur {
         this.score = 0;
     }
 
-    public abstract int jouer();
+    public abstract int jouer(Plateau plateau);
 
     public void ajouterPoint(int point) {
         this.score += point;
