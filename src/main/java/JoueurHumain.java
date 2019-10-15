@@ -4,7 +4,7 @@ public class JoueurHumain extends Joueur {
         super(pseudo);
     }
 
-    public int jouer() {
+    public int jouer(Plateau plateau) {
         return 0;
     }
 
