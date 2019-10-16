@@ -146,9 +146,10 @@ public class Plateau {
 
         // Joueur 1 fini sur joueur 2 et peut gagner des points
         if(i == 1){
-            for(int j = numcase; j < 6; j++){
+            for(int j = numcase; j > 0; j--){
                 if(plateau[1][j] == 3 || plateau[1][j] == 2){
                     res += plateau[1][j];
+                    enleverToutesGraines(1,j);
                 }
                 else break;
             }
@@ -157,6 +158,7 @@ public class Plateau {
             for(int j = numcase; j < 6; j++){
                 if(plateau[0][j] == 3 || plateau[0][j] == 2){
                     res += plateau[0][j];
+                    enleverToutesGraines(0,j);
                 }
                 else break;
             }
