@@ -3,14 +3,20 @@ import java.util.ArrayList;
 public class JoueurIA extends Joueur {
 
     private int profondeur;
+    private int cote;
 
-    public JoueurIA(String pseudo) {
-        super(pseudo);
+    public JoueurIA(String pseudo, int coté) {
+        super(pseudo, coté);
         profondeur = 10;
+        cote = 1;
     }
 
     public void setProfondeur(int profondeur) {
         this.profondeur = 2*profondeur;
+    }
+
+    public void setCote(int cote) {
+        this.cote = cote;
     }
 
     public int jouer(Plateau plateau) {
@@ -27,10 +33,10 @@ public class JoueurIA extends Joueur {
     private int max(Plateau p, int generationRestante){
         if(generationRestante == 0){
             Plateau pl = new Plateau(p);
-            int res = pl.jouerCase(1);
+            int res = pl.jouerCase(1, cote);
             for(int i = 0; i < 5; i++){
                 pl = new Plateau(p);
-                int resbis = pl.jouerCase(i);
+                int resbis = pl.jouerCase(i, cote);
                 if(resbis>res)
                     res = resbis;
             }
@@ -49,9 +55,10 @@ public class JoueurIA extends Joueur {
 
     private Plateau simulerCoup(Plateau p, int i){
         Plateau plateau = new Plateau(p);
-        plateau.jouerCase(i);
+        plateau.jouerCase(i, cote);
         return plateau;
     }
+
 
     private int maxScoreDes6(int i1,int i2,int i3,int i4,int i5,int i6){
         return maxScoreDe2(i1, maxScoreDe2(i2 ,maxScoreDe2(i3 ,maxScoreDe2(i4 ,maxScoreDe2(i5, i6)))));
