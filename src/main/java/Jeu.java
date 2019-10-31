@@ -21,14 +21,19 @@ public class Jeu {
         // fenetre.actionPerformed(new ActionEvent());
 
 
-        String nom = JOptionPane.showInputDialog("Enter le nom du Joueur 1");
+        //String nom = JOptionPane.showInputDialog("Enter le nom du Joueur 1");
+        System.out.println("Veuillez saisir le nom de J1");
+        String nom=sc.nextLine();
         Joueur j1 = new JoueurHumain(nom, 1);
-        System.out.println(j1.getPseudo());
 
 
-        String nom2 = JOptionPane.showInputDialog("Enter le nom du Joueur 2");
+
+        //String nom2 = JOptionPane.showInputDialog("Enter le nom du Joueur 2");
+        System.out.println("Veuillez saisir le nom de J2");
+        String nom2=sc.nextLine();
         Joueur j2 = new JoueurHumain(nom2, 2);
-        System.out.println(j2.getPseudo());
+
+
 
 
 
@@ -145,7 +150,8 @@ public class Jeu {
 
 
     public static void main(String[] args) {
-
+Jeu jeu=new Jeu();
+jeu.deroulement();
 
     }
 

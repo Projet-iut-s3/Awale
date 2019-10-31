@@ -171,9 +171,9 @@ public class Plateau {
 
 
 
-    public String toString(){
+    public String toString(Joueur a,Joueur b){
         String res = "Plateau :\n" +
-                "-0-1-2-3-4-5-   <-- J1\n|";
+                "-0-1-2-3-4-5-   <-- " +a.getPseudo()+"\n|";
 
         for(int j = 0; j < 6; j++){
             int i = 0;
@@ -184,6 +184,22 @@ public class Plateau {
             int i = 1;
             res += plateau[i][j] + "|";
         }
-        return res + "\n-0-1-2-3-4-5-   <-- J2";
+        return res + "\n-0-1-2-3-4-5-   <--"+ b.getPseudo();
+    }
+
+    public String toString(){
+        String res = "Plateau :\n" +
+                "-0-1-2-3-4-5-   <--J1\n|";
+
+        for(int j = 0; j < 6; j++){
+            int i = 0;
+            res += plateau[i][j] + "|";
+        }
+        res +="\n|";
+        for(int j = 0; j < 6; j++){
+            int i = 1;
+            res += plateau[i][j] + "|";
+        }
+        return res + "\n-0-1-2-3-4-5-   <--J2";
     }
 }
