@@ -1,6 +1,6 @@
 public class Plateau {
 
-    int[][] plateau;
+    public int[][] plateau;
     Joueur j1 = new JoueurHumain("J1", 1);
     Joueur j2 = new JoueurHumain("J2", 2);
 

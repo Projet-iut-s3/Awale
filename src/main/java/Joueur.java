@@ -25,6 +25,13 @@ public abstract class Joueur {
         return pseudo;
     }
 
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public void setCoté(int coté) {
+        this.coté = coté;
+    }
 
     public String toString(){
         return "Le joueur " + this.pseudo + " a " + this.score + " points.";

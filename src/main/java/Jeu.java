@@ -1,41 +1,42 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.Scanner;
 
 public class Jeu {
 
+    private static IHM fenetre;
     private Joueur j1;
     private Joueur j2;
     private Plateau plateau;
 
-    public void deroulement(
 
-
-    ){
-
-    }
-
-    public static boolean estGagnant(Joueur j){
-        return j.getScore()>=25;
-    }
-
-
-    public static void main(String[] args) {
-
+    public void deroulement(){
         Scanner sc = new Scanner(System.in);
         String nomJ1;
         String nomJ2;
 
 
-        System.out.println("Entrez un nom de Joueur pour le J1");
-        nomJ1 = sc.nextLine();
-        Joueur j1 = new JoueurHumain(nomJ1, 1);
 
-        System.out.println("Entrez un nom de Joueur pour le J2");
-        nomJ2 = sc.nextLine();
-        Joueur j2 = new JoueurHumain(nomJ2, 2);
+        // fenetre.actionPerformed(new ActionEvent());
+
+
+        String nom = JOptionPane.showInputDialog("Enter le nom du Joueur 1");
+        Joueur j1 = new JoueurHumain(nom, 1);
+        System.out.println(j1.getPseudo());
+
+
+        String nom2 = JOptionPane.showInputDialog("Enter le nom du Joueur 2");
+        Joueur j2 = new JoueurHumain(nom2, 2);
+        System.out.println(j2.getPseudo());
+
+
+
 
 
         Plateau plateau = new Plateau();
         System.out.println(plateau);
+
 
 
         int nbTotalGraines = 48;
@@ -102,7 +103,6 @@ public class Jeu {
             System.out.println("\nJ2 choisissez la case à jouer\n");
             numCase = Integer.parseInt(sc.nextLine());
             while (numCase > 5 || numCase < 0) {
-
                 System.out.println("La case saisie n'est pas valide, veuillez sélectionner une case entre 0 et 5\n");
                 numCase = Integer.parseInt(sc.nextLine());
             }
@@ -110,35 +110,20 @@ public class Jeu {
             val = plateau.jouerCase(numCase, 2);
 
             while (val < 0) {
-
                 if (val == -1) {
                     System.out.println("Joueur 2, cette case est vide veuillez en sélectionner une contenant des graines.\n");
                 }
-
-
                 numCase = Integer.parseInt(sc.nextLine());
-
                 while (numCase > 5 || numCase < 0) {
-
                     System.out.println("La case saisie n'est pas valide, veuillez sélectionner une case entre 0 et 5\n");
                     numCase = Integer.parseInt(sc.nextLine());
-
                 }
-
                 val = plateau.jouerCase(numCase, 2);
-
             }
 
-
             j2.ajouterPoint(val);
-
-
             System.out.println(plateau);
-
-
             nbTotalGraines -= val;
-
-
             System.out.println(j1.toString());
             System.out.println(j2.toString());
         }
@@ -153,6 +138,16 @@ public class Jeu {
 
     }
 
+
+    public static boolean estGagnant(Joueur j){
+        return j.getScore()>=25;
+    }
+
+
+    public static void main(String[] args) {
+
+
+    }
 
 
 }
