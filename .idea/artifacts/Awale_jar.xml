@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Awale:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Awale_jar</output-path>
+    <root id="archive" name="Awale.jar">
+      <element id="module-output" name="Awale" />
+    </root>
+  </artifact>
+</component>

@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.ImageGraphicAttribute;
 import java.io.File;
 
 public class IHM extends JFrame implements ActionListener {
@@ -32,7 +33,7 @@ public class IHM extends JFrame implements ActionListener {
     public IHM() {
         super("Awale");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(new Dimension(600, 400));
+        this.setSize(new Dimension(800, 400));
         this.setLocationRelativeTo(null);
 
 
@@ -46,8 +47,7 @@ public class IHM extends JFrame implements ActionListener {
         j2 = new JoueurHumain(nom2, 2);
         jo= new JOptionPane(plateau.toString(j1,j2));
 
-        contentPane.setLayout(new GridLayout(3, 6));
-
+        contentPane.setLayout(new GridLayout(3, 8));
 
         contentPane.add(b0);
         contentPane.add(b1);
@@ -61,7 +61,6 @@ public class IHM extends JFrame implements ActionListener {
         contentPane.add(b3j2);
         contentPane.add(b4j2);
         contentPane.add(b5j2);
-
 
         contentPane.add(jo);
         contentPane.add(l);
@@ -140,8 +139,14 @@ public class IHM extends JFrame implements ActionListener {
                 }
             }
             if (val > 0) j1.ajouterPoint(val);
-            if (j1.getScore() >= 25) JOptionPane.showMessageDialog(frame, j1.getPseudo() + " a gagné !!!");
-            if (j2.getScore() >= 25) JOptionPane.showMessageDialog(frame, j2.getPseudo() + " a gagné !!!");
+            if (j1.getScore() >= 25) {
+                JOptionPane.showMessageDialog(frame, j1.getPseudo() + " a gagné !!!");
+                System.exit(0);
+            }
+            if (j2.getScore() >= 25) {
+                JOptionPane.showMessageDialog(frame, j2.getPseudo() + " a gagné !!!");
+                System.exit(0);
+            }
 
 
             jo.setMessage(plateau.toString(j1,j2));
@@ -157,8 +162,6 @@ public class IHM extends JFrame implements ActionListener {
             b3j2.setIcon(new ImageIcon("PHOTOGRAINE/"+plateau.plateau[1][3]+"bille.jpg"));
             b4j2.setIcon(new ImageIcon("PHOTOGRAINE/"+plateau.plateau[1][4]+"bille.jpg"));
             b5j2.setIcon(new ImageIcon("PHOTOGRAINE/"+plateau.plateau[1][5]+"bille.jpg"));
-
-
 
             l.setText(j2.getPseudo() + " choisissez un case à jouer");
             scorej1.setText(j1.getPseudo() + " score : " + j1.getScore());
@@ -217,8 +220,14 @@ public class IHM extends JFrame implements ActionListener {
                 }
             }
             if (val > 0) j2.ajouterPoint(val);
-            if (j1.getScore() >= 25) JOptionPane.showMessageDialog(frame, j1.getPseudo() + " a gagné !!!");
-            if (j2.getScore() >= 25) JOptionPane.showMessageDialog(frame, j2.getPseudo() + " a gagné !!!");
+            if (j1.getScore() >= 25) {
+                JOptionPane.showMessageDialog(frame, j1.getPseudo() + " a gagné !!!");
+                System.exit(0);
+            }
+            if (j2.getScore() >= 25) {
+                JOptionPane.showMessageDialog(frame, j2.getPseudo() + " a gagné !!!");
+                System.exit(0);
+            }
             jo.setMessage(plateau.toString(j1,j2));
             b0.setIcon(new ImageIcon("PHOTOGRAINE/"+plateau.plateau[0][0]+"bille.jpg"));
             b1.setIcon(new ImageIcon("PHOTOGRAINE/"+plateau.plateau[0][1]+"bille.jpg"));

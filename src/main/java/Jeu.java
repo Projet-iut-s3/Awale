@@ -17,7 +17,6 @@ public class Jeu {
         String nomJ2;
 
 
-
         // fenetre.actionPerformed(new ActionEvent());
 
 
