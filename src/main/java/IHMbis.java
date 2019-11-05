@@ -61,19 +61,19 @@ public class IHMbis extends JFrame implements ActionListener {
         JButton selectedItem = (JButton) e.getSource();
         int val = 0;
         Joueur joueurquiajoue;
-        Joueur joueurquivajouer;
+        String joueurquivajouer;
         int cote;
         int coteplateau;
         if (l.getText().equals(j1.getPseudo() + " choisissez une case à jouer")){
             joueurquiajoue = j1;
-            joueurquivajouer = j2;
-            cote = 1;
+            joueurquivajouer = j2.getPseudo();
+            cote = 0;
             coteplateau = 1;
         }
         else {
             joueurquiajoue = j2;
-            joueurquivajouer = j1;
-            cote = 0;
+            joueurquivajouer = j1.getPseudo();
+            cote = 1;
             coteplateau = 2;
         }
 
@@ -95,8 +95,7 @@ public class IHMbis extends JFrame implements ActionListener {
         for(int i = 0; i<2; i++)
             for (int j = 0; j < 6; j++)
                 jButtonList.get(i).get(j).setIcon(imageIconList.get(plateau.plateau[i][j]));
-
-        l.setText(joueurquivajouer.getPseudo() + " choisissez un case à jouer");
+        l.setText(joueurquivajouer + " choisissez un case à jouer");
         scorej1.setText(j1.getPseudo() + " score : " + j1.getScore());
         scorej2.setText(j2.getPseudo() + " score : " + j2.getScore());
     }
