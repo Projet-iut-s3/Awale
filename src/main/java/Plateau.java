@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Plateau {
 
     public int[][] plateau;
     Joueur j1 = new JoueurHumain("J1", 1);
     Joueur j2 = new JoueurHumain("J2", 2);
-
+    List<Regle> regles;
 
     public Plateau() {
         this.plateau = new int[2][6];
@@ -12,8 +15,8 @@ public class Plateau {
                 plateau[i][j] = 4;
             }
         }
+        initialiserRegle();
     }
-
 
     public Plateau(Plateau other) {
         this.plateau = other.plateau;
@@ -35,12 +38,16 @@ public class Plateau {
         plateau[i][j] = 0;
     }
 
+    public void initialiserRegle(){
+        regles = new ArrayList<>();
+        regles.add(new Affame());
+        regles.add(new Doitdonner());
+    }
 
 
+    public int jouerCase(int j, int cote) {
 
-    public int jouerCase(int j, int coté) {
-
-        if (coté == 1) {
+        if (cote == 1) {
 
             int nbGraine = getnbGraines(0, j);
 
@@ -128,18 +135,12 @@ public class Plateau {
         return 0;
     }
 
-
-
-
-
     public boolean coupPossible(int i, int j){
-        return true;
+        boolean res = true;
+        for(Regle regle : regles)
+            res &= regle.appliquerRegle(this, i, j);
+        return res;
     }
-
-
-
-
-
 
     public int gagnerPoints(int i, int numcase){
         int res = 0;
