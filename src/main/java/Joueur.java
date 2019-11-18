@@ -1,12 +1,12 @@
 public abstract class Joueur {
 
     private String pseudo;
-    private int coté;
+    private int cote;
     private int score;
 
-    public Joueur(String pseudo, int coté) {
+    public Joueur(String pseudo, int cote) {
         this.pseudo = pseudo;
-        this.coté = coté;
+        this.cote = cote;
         this.score = 0;
     }
 
@@ -29,8 +29,8 @@ public abstract class Joueur {
         this.pseudo = pseudo;
     }
 
-    public void setCoté(int coté) {
-        this.coté = coté;
+    public void setCote(int cote) {
+        this.cote = cote;
     }
 
     public String toString(){
