@@ -164,13 +164,8 @@ public class Plateau {
                 else break;
             }
         }
-
         return res;
     }
-
-
-
-
 
     public String toString(Joueur a,Joueur b){
         String res = "Plateau :\n" +

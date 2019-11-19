@@ -5,8 +5,8 @@ public class JoueurIA extends Joueur {
     private int profondeur;
     private int cote;
 
-    public JoueurIA(String pseudo, int coté) {
-        super(pseudo, coté);
+    public JoueurIA(String pseudo, int cote) {
+        super(pseudo, cote);
         profondeur = 10;
         cote = 1;
     }
