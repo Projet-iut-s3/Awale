@@ -64,7 +64,7 @@ public class IHMbis extends JFrame implements ActionListener {
         String joueurquivajouer;
         int cote;
         int coteplateau;
-        if (l.getText().contains(j1.getPseudo() + " choisissez une case à jouer")){
+        if (l.getText().contains(j1.getPseudo())){
             joueurquiajoue = j1;
             joueurquivajouer = j2.getPseudo();
             cote = 0;
