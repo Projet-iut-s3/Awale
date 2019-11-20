@@ -4,7 +4,7 @@ export class Plateau {
     
     plateau;
     static regles = () => {
-        reg = new Array;
+        let reg = new Array;
         reg.push(new Affame());
         reg.push(new Doitdonner());
         return reg;
@@ -18,8 +18,8 @@ export class Plateau {
         this.j2 = j2;
     }
 
-    couoPossible(i, j){
-        res = this.plateau[i][j]!=0;
+    coupPossible(i, j){
+        let res = this.plateau[i][j]!==0;
         this.regles.forEach(regle => {
             res &= regle.appliquerRegle(this, i, j);
         });
