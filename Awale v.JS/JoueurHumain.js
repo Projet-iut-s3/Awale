@@ -1,6 +1,6 @@
 import { Joueur } from "./Joueur";
 
-class JoueurHumain extends Joueur {
+export class JoueurHumain extends Joueur {
     constructor(pseudo, cote) {
         super(pseudo, cote);
     }

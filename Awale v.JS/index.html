@@ -2,14 +2,37 @@
 <html>
 <head>
     <title>Awale</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div class="jeu" id="AwaleContener">
-        <a onclick="IHM.click(1)">Test1</a>
-        <a onclick="IHM.click(2)">Test2</a>
-        <a onclick="IHM.click(3)">Test3</a>
-        <a onclick="IHM.click(4)">Test4</a>
+    <script src="IHM.js">
+        import {IHM} from './IHM'
+        const ihm = new IHM();
+    </script>
+    <div class="jeu grid" id="AwaleContener">
+        <div class="col-left" id="grille_case">
+            <div class="row">
+                <a onclick="ihm.click(0)"><img alt="case0" src="./PHOTOGRAINE/4bille.jpg"></a>
+                <a onclick="ihm.click(1)"><img alt="case1" src="./PHOTOGRAINE/4bille.jpg"></a>
+                <a onclick="ihm.click(2)"><img alt="case2" src="../PHOTOGRAINE/4bille.jpg"></a>
+                <a onclick="ihm.click(3)"><img alt="case3" src="../PHOTOGRAINE/4bille.jpg"></a>
+                <a onclick="ihm.click(4)"><img alt="case4" src="../PHOTOGRAINE/4bille.jpg"></a>
+            </div>
+            <div class="row">
+                <a onclick="ihm.click(5)"><img alt="case5" src="../PHOTOGRAINE/4bille.jpg"></a>
+                <a onclick="ihm.click(6)"><img alt="case6" src="../PHOTOGRAINE/4bille.jpg"></a>
+                <a onclick="ihm.click(7)"><img alt="case7" src="../PHOTOGRAINE/4bille.jpg"></a>
+                <a onclick="ihm.click(8)"><img alt="case8" src="../PHOTOGRAINE/4bille.jpg"></a>
+                <a onclick="ihm.click(9)"><img alt="case9" src="../PHOTOGRAINE/4bille.jpg"></a>
+            </div>
+        </div>
+        <div class="col-rigth">
+            <p>C'est au joueur <span id="joueurQuiDoitJouer">1</span> de jouer</p>
+            <br>
+            <p>Points du joueur 1: <span id="pointJoueur1">0</span> </p>
+            <p>Points du joueur 2: <span id="pointJoueur2">0</span> </p>
+        </div>
     </div>
-    <script src="IHM.js"></script>
 </body>
 </html>

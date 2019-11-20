@@ -1,0 +1,24 @@
+.jeu {
+	margin: 10px;
+}
+
+.grid {
+    display: flex;
+}
+
+.grid .col-left {
+    width: 75%;
+}
+
+.grid .col-rigth {
+    width: 25%;
+    margin-top: 10px;
+}
+
+.grid .col-left .row {
+
+}
+
+.grid .col-left .row a img {
+    width: 19%;
+}
