@@ -31,6 +31,8 @@ export class IHM {
                 else if(res===2)
                     document.getElementById('joueurvictoire').innerText = "Victoire du joueur 2 ("+this.jeu.j2.pseudo+")";
                 this.tour = this.tour % 2 + 1;
+                if(res!==0)
+                    this.fini = true;
             }
             this.paint();
         }
