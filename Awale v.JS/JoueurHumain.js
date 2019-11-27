@@ -1,4 +1,4 @@
-import { Joueur } from "./Joueur";
+import { Joueur } from "./Joueur.js";
 
 export class JoueurHumain extends Joueur {
     constructor(pseudo, cote) {

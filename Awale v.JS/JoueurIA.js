@@ -1,5 +1,5 @@
-import { Joueur } from "./Joueur";
-import { Plateau } from "./Plateau";
+import { Joueur } from "./Joueur.js";
+import { Plateau } from "./Plateau.js";
 
 class JoueurIA extends Joueur {
 
@@ -15,8 +15,8 @@ class JoueurIA extends Joueur {
     }
 
     jouer(plateau) {
-        coupAFaire = new Array;
-        tousLesCoups = this.coupsPossibles();
+        let coupAFaire = [];
+        let tousLesCoups = this.coupsPossibles();
         tousLesCoups.forEach((element) => {
             coupAFaire.push(min(plateau, this.pronfondeur-1));
         });
@@ -24,15 +24,15 @@ class JoueurIA extends Joueur {
     }
     
     max(p, pronf){
-        if(this.coupsPossibles().length==0 || pronf==this.pronfondeur+1) {
-            if(p.victorieux()==this.pseudo)
+        if(this.coupsPossibles().length===0 || pronf===this.pronfondeur+1) {
+            if(p.victorieux()===this.pseudo)
                 return 1000-pronf; // Victoire de l'IA
-            else if(p.victorieux()!=0)
+            else if(p.victorieux()!==0)
                 return -1000+pronf; // Victoire de l'autre joueur
             else
                 return 0; // On s'arrete de regarder et on deplie la pile
         }
-        vals_max = new Array;
+        let vals_max = [];
         this.coupsPossibles().forEach((element) => {
             vals_max.push(this.pointsijouer(p, element) + this.min(this.simulerCoup(p, element), pronf+1));
         });
@@ -40,15 +40,15 @@ class JoueurIA extends Joueur {
     }
 
     min(p, pronf) {
-        if(this.coupsPossibles().length==0 || pronf==this.pronfondeur+1) {
-            if(p.victorieux()==this.pseudo)
+        if(this.coupsPossibles().length===0 || pronf===this.pronfondeur+1) {
+            if(p.victorieux()===this.pseudo)
                 return 1000-pronf; // Victoire de l'IA
-            else if(p.victorieux()!=0)
+            else if(p.victorieux()!==0)
                 return -1000+pronf; // Victoire de l'autre joueur
             else
                 return 0; // On s'arrete de regarder et on deplie la pile
         }
-        vals_min = new Array();
+        let vals_min = [];
         this.coupsPossibles().forEach((element) => {
             vals_min.push(this.pointsijouer(p, element) + this.max(this.simulerCoup(p, element), pronf+1));
         });
@@ -56,12 +56,12 @@ class JoueurIA extends Joueur {
     }
 
     pointsijouer(p, i) {
-        plateau = new Plateau(p);
+        let plateau = new Plateau(p);
         return plateau.jouerCase(i, cote); // Le nombre de point si le joueur jouer cette case
     }
     
     simulerCoup(p, i){
-        plateau = new Plateau(p);
+        let plateau = new Plateau(p);
         plateau.jouerCase(i, cote);
         return plateau; // Un plateau fictif dans lequel le jouer a jouer cette case
     }

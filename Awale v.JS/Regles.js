@@ -4,7 +4,9 @@ export class Regle {
 
 	}
 
-	appliquerRegle(p, i, j);
+	appliquerRegle(p, i, j) {
+	    return true;
+    }
 
 }
 

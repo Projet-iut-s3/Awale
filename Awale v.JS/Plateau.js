@@ -1,31 +1,44 @@
-import { Regle, Affame, Doitdonner } from "./Regles";
+import { Regle, Affame, Doitdonner } from "./Regles.js";
+import {JoueurHumain} from "./JoueurHumain.js";
 
 export class Plateau {
     
     plateau;
-    static regles = () => {
-        let reg = new Array;
-        reg.push(new Affame());
-        reg.push(new Doitdonner());
-        return reg;
-    };
+    static regles = Plateau.initialiserRegle();
     j1;
     j2;
 
-    constructor(j1, j2){
-        this.j1 = j1;
-        this.j2 = j2;
+    static initialiserRegle() {
+        let reg = [];
+        reg.push(new Affame());
+        reg.push(new Doitdonner());
+        return reg;
     }
 
-    constructor(p) {
-        this.plateau = p.plateau;
-        this.j1 = p.j1;
-        this.j2 = p.j2;
+    constructor(j1, j2){
+        if(j1 instanceof JoueurHumain) {
+            this.j1 = j1;
+            this.j2 = j2;
+            this.plateau = [];
+            for(let i = 0; i<2; i++) {
+                let a = [];
+                for(let j = 0; j<5; j++)
+                    a.push(4);
+                this.plateau.push(a);
+            }
+            // this.plateau = [[3,4,4,4,4], [1,1,2,4,4]];
+        }
+        else {
+            this.plateau = j1.plateau;
+            this.j1 = j1.j1;
+            this.j2 = j1.j2;
+        }
+        console.log(Plateau.regles);
     }
 
     coupPossible(i, j){
         let res = this.plateau[i][j]!==0;
-        this.regles.forEach(regle => {
+        Plateau.regles.forEach(regle => {
             res &= regle.appliquerRegle(this, i, j);
         });
         return res;
@@ -40,7 +53,83 @@ export class Plateau {
     }
 
     jouerCase(j, cote) {
-        
+        if(this.coupPossible(cote, j)){
+            let jcote = this.incrCases(j, cote, this.retirerGraine(j, cote));
+            console.log(jcote);
+            console.log(jcote[0], jcote[1]);
+            return this.gagnerpoint(jcote[0], jcote[1]);
+        }
+        return 0;
     }
 
+    getCase(i, j) {
+        return this.plateau[i][j];
+    }
+
+    retirerGraine(j, cote) {
+        let graine = this.plateau[cote][j];
+        this.plateau[cote][j] = 0;
+        return graine;
+    }
+
+    incrGraine(j, cote) {
+        this.plateau[cote][j]++;
+    }
+
+    incrCases(j, cote, nbcase) {
+        if(cote===0) {
+            if (j === 0)
+                return this.incrCasesAux(0, 1, nbcase);
+            else
+                return this.incrCasesAux(j - 1, cote, nbcase);
+        } else {
+            if (j === 4)
+                return this.incrCasesAux(4, 0, nbcase);
+            else
+                return this.incrCasesAux(j + 1, cote, nbcase);
+        }
+    }
+
+    incrCasesAux(j, cote, nbcase) {
+        if(nbcase!==0) {
+            this.incrGraine(j, cote);
+            if (cote === 0) {
+                if(j===0)
+                    return this.incrCasesAux(0, 1, nbcase-1);
+                else
+                    return this.incrCasesAux(j-1, cote, nbcase-1);
+            } else {
+                if(j===4)
+                    return this.incrCasesAux(4, 0, nbcase-1);
+                else
+                    return this.incrCasesAux(j+1, cote, nbcase-1);
+            }
+        }
+        console.log([j, cote]);
+        if(cote === 0) {
+            if (j === 4)
+                return [4, 1];
+            return [j+1, 0];
+        } else {
+            if (j === 0)
+                return [0, 0];
+            return [j-1, 1];
+        }
+    }
+
+    gagnerpoint(j, cote) {
+        if(this.plateau[cote][j]===2 || this.plateau[cote][j]===3) {
+            let point = this.retirerGraine(j, cote);
+            if(cote===1) {
+                if(j===0)
+                    return point + this.gagnerpoint(0, 0);
+                return point + this.gagnerpoint(j-1, cote);
+            } else {
+                if(j===4)
+                    return point + this.gagnerpoint(4, 1);
+                return point + this.gagnerpoint(j+1, cote);
+            }
+        }
+        return 0;
+    }
 }

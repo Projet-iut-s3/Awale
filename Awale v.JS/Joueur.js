@@ -12,7 +12,7 @@ export class Joueur {
         this.score = 0;
     }
 
-    jouer(plateau);
+    jouer(plateau){}
 
     ajouterPoint(point) {
         this.score += point;
