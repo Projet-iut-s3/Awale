@@ -33,7 +33,6 @@ export class Plateau {
             this.j1 = j1.j1;
             this.j2 = j1.j2;
         }
-        console.log(Plateau.regles);
     }
 
     coupPossible(i, j){
@@ -53,11 +52,12 @@ export class Plateau {
     }
 
     jouerCase(j, cote) {
+        if(this.plateau[cote][j]===0)
+            return -1;
         if(this.coupPossible(cote, j)){
             let jcote = this.incrCases(j, cote, this.retirerGraine(j, cote));
-            console.log(jcote);
-            console.log(jcote[0], jcote[1]);
-            return this.gagnerpoint(jcote[0], jcote[1]);
+            if(jcote[1]!==cote)
+                return this.gagnerpoint(jcote[0], jcote[1]);
         }
         return 0;
     }
@@ -105,7 +105,6 @@ export class Plateau {
                     return this.incrCasesAux(j+1, cote, nbcase-1);
             }
         }
-        console.log([j, cote]);
         if(cote === 0) {
             if (j === 4)
                 return [4, 1];

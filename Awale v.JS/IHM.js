@@ -1,15 +1,14 @@
 import {JoueurHumain} from "./JoueurHumain.js";
-import {Jeu} from './jeu.js';
+import {Jeu} from './Jeu.js';
 
 export class IHM {
-
-    jeu;
-    tour = 2;
 
     constructor() {
         let j1 = new JoueurHumain("sam", 1);
         let j2 = new JoueurHumain("uel", 1);
         this.jeu = new Jeu(j1, j2, 0);
+        this.tour = 1;
+        this.fini = false;
     }
 
     paint() {
@@ -23,10 +22,18 @@ export class IHM {
     }
 
     click(i) {
-        this.tour = this.tour % 2 + 1;
-        let cote = Math.floor(i / 5);
-        this.jeu.jouer(i%5, cote);
-        this.paint();
+        if(!this.fini) {
+            let cote = Math.floor(i / 5);
+            let res = this.jeu.jouer(i % 5, cote);
+            if (res !== -1) {
+                if(res===1)
+                    document.getElementById('joueurvictoire').innerText = "Victoire du joueur 1 ("+this.jeu.j1.pseudo+")";
+                else if(res===2)
+                    document.getElementById('joueurvictoire').innerText = "Victoire du joueur 2 ("+this.jeu.j2.pseudo+")";
+                this.tour = this.tour % 2 + 1;
+            }
+            this.paint();
+        }
     }
 
     static init() {
@@ -53,6 +60,7 @@ export class IHM {
             "            <br>\n" +
             "            <p>Points du joueur 1 (<span id='nomJoueur1'></span>) : <span id='pointJoueur1'>0</span> </p>\n" +
             "            <p>Points du joueur 2 (<span id='nomJoueur2'></span>) : <span id='pointJoueur2'>0</span> </p>\n" +
+            "            <p id='joueurvictoire'></p>\n" +
             "        </div>"
         for (let i=0; i<10; i++)
             document.getElementById("click_case"+i).onclick = () => ihm.click(i);

@@ -24,8 +24,10 @@ export class Jeu {
     jouer(j, cote) {
         if(cote!==this.tour)
             return -1; // Ce n'est pas a lui de jouer;
-        this.tour = (this.tour+1)%2;
         let point = this.plateau.jouerCase(j, cote);
+        if(point===-1)
+            return -1;
+        this.tour = (this.tour + 1) % 2;
         if(this.tour===0) // on a change le tour
             this.j2.ajouterPoint(point);
         else
