@@ -1,4 +1,4 @@
-export class Regle {
+class Regle {
 
 	constructor(){
 
@@ -10,7 +10,7 @@ export class Regle {
 
 }
 
-export class Affame extends Regle {
+class Affame extends Regle {
     
     appliquerRegle(p, i, j){
         return true;
@@ -18,7 +18,7 @@ export class Affame extends Regle {
 
 }
 
-export class Doitdonner extends Regle {
+class Doitdonner extends Regle {
     
     appliquerRegle(p, i, j){
         return true;
@@ -26,3 +26,4 @@ export class Doitdonner extends Regle {
 
 }
 
+module.exports = {Affame, Doitdonner};
