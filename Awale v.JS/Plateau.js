@@ -88,8 +88,8 @@ export class Plateau {
             else
                 return this.incrCasesAux(j - 1, cote, nbcase);
         } else {
-            if (j === 4)
-                return this.incrCasesAux(4, 0, nbcase);
+            if (j === nbcasejoueur-1)
+                return this.incrCasesAux(nbcasejoueur-1, 0, nbcase);
             else
                 return this.incrCasesAux(j + 1, cote, nbcase);
         }
@@ -104,15 +104,15 @@ export class Plateau {
                 else
                     return this.incrCasesAux(j-1, cote, nbcase-1);
             } else {
-                if(j===4)
-                    return this.incrCasesAux(4, 0, nbcase-1);
+                if(j===nbcasejoueur-1)
+                    return this.incrCasesAux(nbcasejoueur-1, 0, nbcase-1);
                 else
                     return this.incrCasesAux(j+1, cote, nbcase-1);
             }
         }
         if(cote === 0) {
-            if (j === 4)
-                return [4, 1];
+            if (j === nbcasejoueur-1)
+                return [nbcasejoueur-1, 1];
             return [j+1, 0];
         } else {
             if (j === 0)
@@ -129,8 +129,8 @@ export class Plateau {
                     return point + this.gagnerpoint(0, 0);
                 return point + this.gagnerpoint(j-1, cote);
             } else {
-                if(j===4)
-                    return point + this.gagnerpoint(4, 1);
+                if(j===nbcasejoueur-1)
+                    return point + this.gagnerpoint(nbcasejoueur-1, 1);
                 return point + this.gagnerpoint(j+1, cote);
             }
         }

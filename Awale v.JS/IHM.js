@@ -50,13 +50,15 @@ export class IHM {
             "                <a id='click_case2'><img id='img_case2' alt='case2' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
             "                <a id='click_case3'><img id='img_case3' alt='case3' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
             "                <a id='click_case4'><img id='img_case4' alt='case4' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
+            "                <a id='click_case5'><img id='img_case5' alt='case5' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
             "            </div>\n" +
             "            <div class='row'>\n" +
-            "                <a id='click_case5'><img id='img_case5' alt='case5' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
             "                <a id='click_case6'><img id='img_case6' alt='case6' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
             "                <a id='click_case7'><img id='img_case7' alt='case7' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
             "                <a id='click_case8'><img id='img_case8' alt='case8' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
             "                <a id='click_case9'><img id='img_case9' alt='case9' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
+            "                <a id='click_case10'><img id='img_case10' alt='case10' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
+            "                <a id='click_case11'><img id='img_case11' alt='case11' src='../PHOTOGRAINE/4bille.jpg'></a>\n" +
             "            </div>\n" +
             "        </div>\n" +
             "        <div class='col-rigth'>\n" +
@@ -65,8 +67,8 @@ export class IHM {
             "            <p>Points du joueur 1 (<span id='nomJoueur1'></span>) : <span id='pointJoueur1'>0</span> </p>\n" +
             "            <p>Points du joueur 2 (<span id='nomJoueur2'></span>) : <span id='pointJoueur2'>0</span> </p>\n" +
             "            <p id='joueurvictoire'></p>\n" +
-            "        </div>"
-        for (let i=0; i<10; i++)
+            "        </div>";
+        for (let i=0; i<2*nbcasejoueur; i++)
             document.getElementById("click_case"+i).onclick = () => ihm.click(i);
         document.getElementById("nomJoueur1").innerText = ihm.jeu.j1.pseudo;
         document.getElementById("nomJoueur2").innerText = ihm.jeu.j2.pseudo;
