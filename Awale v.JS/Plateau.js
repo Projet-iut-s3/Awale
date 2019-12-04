@@ -1,5 +1,6 @@
 import { Regle, Affame, Doitdonner } from "./Regles.js";
 import {JoueurHumain} from "./JoueurHumain.js";
+import {nbcasejoueur} from "./IHM.js";
 
 export class Plateau {
     
@@ -22,17 +23,21 @@ export class Plateau {
             this.plateau = [];
             for(let i = 0; i<2; i++) {
                 let a = [];
-                for(let j = 0; j<5; j++)
+                for(let j = 0; j<nbcasejoueur; j++)
                     a.push(4);
                 this.plateau.push(a);
             }
             // this.plateau = [[3,4,4,4,4], [1,1,2,4,4]];
         }
-        else {
+        else if(j1 instanceof Plateau) {
             this.plateau = j1.plateau;
             this.j1 = j1.j1;
             this.j2 = j1.j2;
         }
+    }
+
+    setPlateau(p) {
+        this.plateau = p;
     }
 
     coupPossible(i, j){

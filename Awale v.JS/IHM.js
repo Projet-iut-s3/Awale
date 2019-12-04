@@ -1,6 +1,8 @@
 import {JoueurHumain} from "./JoueurHumain.js";
 import {Jeu} from './Jeu.js';
 
+export const nbcasejoueur = 6;
+
 export class IHM {
 
     constructor() {
@@ -15,16 +17,16 @@ export class IHM {
         let joueurQuiDoitJouer = document.getElementById('joueurQuiDoitJouer');
         joueurQuiDoitJouer.innerText = this.tour + "";
         for (let i=0; i<2; i++)
-            for (let j=0; j<5; j++)
-                document.getElementById('img_case'+(i*5+j)).src = "../PHOTOGRAINE/"+this.jeu.getPlateau().getCase(i, j)+"bille.jpg";
+            for (let j=0; j<nbcasejoueur; j++)
+                document.getElementById('img_case'+(i*nbcasejoueur+j)).src = "../PHOTOGRAINE/"+this.jeu.getPlateau().getCase(i, j)+"bille.jpg";
         document.getElementById('pointJoueur1').innerText = this.jeu.j1.score;
         document.getElementById('pointJoueur2').innerText = this.jeu.j2.score;
     }
 
     click(i) {
         if(!this.fini) {
-            let cote = Math.floor(i / 5);
-            let res = this.jeu.jouer(i % 5, cote);
+            let cote = Math.floor(i / nbcasejoueur);
+            let res = this.jeu.jouer(i % nbcasejoueur, cote);
             if (res !== -1) {
                 if(res===1)
                     document.getElementById('joueurvictoire').innerText = "Victoire du joueur 1 ("+this.jeu.j1.pseudo+")";
