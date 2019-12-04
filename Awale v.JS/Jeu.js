@@ -6,11 +6,13 @@ export class Jeu {
     tour; // O pour j1 | 1 pour j2
     plateau;
 
-    constructor(j1, j2, tour) {
+    constructor(j1, j2, tour, plateau = null) {
         this.tour = tour;
         this.j1 = j1;
         this.j2 = j2;
         this.plateau = new Plateau(this.j1, this.j2);
+        if(plateau!==null)
+            this.plateau.setPlateau(plateau);
     }
 
     aGagner() {
