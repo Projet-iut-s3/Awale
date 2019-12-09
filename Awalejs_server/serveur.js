@@ -30,16 +30,23 @@ var server = http.createServer(function(req, res) {
 
 var io = require('socket.io').listen(server);*/
 
+io.on('ready', ()=> {
+    console.log('Je suis pret');
+});
+
 io.on('connection', function (socket) {
     console.log('Un client s\'est connecté');
     socket.emit('log', 'Login success');
     socket.on('con', function (pseudo) {
         socket.pseudo = pseudo;
-        if(typeof j1 === 'undefined')
+        if(typeof j1 === 'undefined') {
             j1 = new JoueurHumain(pseudo, 1);
+            socket.player = 'j1';
+        }
         else {
             j2 = new JoueurHumain(pseudo, 2);
-            jeu = new Jeu(j1, j2, 0);
+            socket.player = 'j2';
+            jeu = new Jeu(j1, j2, 1);
             fini = false;
             socket.broadcast.emit('list_joueur', {j1:j1.pseudo, j2:j2.pseudo});
             socket.emit('list_joueur', {j1:j1.pseudo, j2:j2.pseudo});
@@ -48,19 +55,22 @@ io.on('connection', function (socket) {
     socket.on('click', function (i) { // Quand le joueur click
         console.log('click sur', i);
         if(typeof j1 !== 'undefined' && typeof j2 !== 'undefined') {
-            console.log(jeu.getPlateau().getPlateauList());
             if(!fini) {
                 let cote = Math.floor(i / 5);
-                console.log("cote", cote);
                 let res = jeu.jouer(i % 5, cote);
-                if (res !== -1)
+                if (res !== 0 && res!==-1)
                     fini = true;
             }
             socket.broadcast.emit('click_resultat', {j1: j1.score, j2:j2.score, tour: jeu.getTour(), cases: jeu.getPlateau().getPlateauList()});
             socket.emit('click_resultat', {j1: j1.score, j2:j2.score, tour: jeu.getTour(), cases: jeu.getPlateau().getPlateauList()});
-            console.log(jeu);
-            console.log(jeu.getPlateau().getPlateauList());
         }
     });
+    socket.on('disconnect', ()=> {
+        if(socket.player==='j1')
+            j1 = undefined;
+        else
+            j2 = undefined;
+        socket.broadcast.emit('log', 'Un joueur s\'est déconnecté')
+    })
 });
 

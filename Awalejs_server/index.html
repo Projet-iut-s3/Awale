@@ -3,12 +3,13 @@
 <head>
     <title>Awale</title>
     <meta charset="UTF-8">
+    <link type="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="jeu grid" id="AwaleContener">
     <div class='col-left' id='grille_case'>
         <div class='row'>
-            <a id='click_case0' ><img id='img_case0' alt='case0' src='./images/4bille.jpg'></a>
+            <a id='click_case0'><img id='img_case0' alt='case0' src='images/4bille.jpg'></a>
             <a id='click_case1'><img id='img_case1' alt='case1' src='images/4bille.jpg'></a>
             <a id='click_case2'><img id='img_case2' alt='case2' src='images/4bille.jpg'></a>
             <a id='click_case3'><img id='img_case3' alt='case3' src='images/4bille.jpg'></a>
@@ -25,37 +26,46 @@
     <div class='col-rigth'>
         <p>C'est au joueur <span id='joueurQuiDoitJouer'>1</span> de jouer</p>
         <br>
-        <p>Points du joueur 1 (<span id='nomJoueur1'>"+pseudo+"</span>) : <span id='pointJoueur1'>0</span> </p>
-        <p>Points du joueur 2 (<span id='nomJoueur2'></span>) : <span id='pointJoueur2'>0</span> </p>
+        <p>Points du joueur 1 (<span id='nomJoueur1'> </span>) : <span id='pointJoueur1'>0</span> </p>
+        <p>Points du joueur 2 (<span id='nomJoueur2'> </span>) : <span id='pointJoueur2'>0</span> </p>
         <p id='joueurvictoire'></p>
     </div>
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    var socket = io.connect('http://localhost:8080');
+    const socket = io.connect('http://localhost:8080');
+    let tourjoueur;
+    let tour = 1;
 
     function init(pseudo) {
         for (let i=0; i<10; i++)
-            document.getElementById("click_case"+i).onclick = () => socket.emit('click', i);
+            document.getElementById("click_case"+i).onclick = () => {
+                if(tour === tourjoueur)
+                    socket.emit('click', i);
+            };
         socket.emit('con', pseudo);
     }
     socket.on('list_joueur', (pseudo)=>{
-        console.log('test');
         document.getElementById("nomJoueur1").innerText = pseudo.j1;
         document.getElementById("nomJoueur2").innerText = pseudo.j2;
+        if(pseudo.j1===nom)
+            tourjoueur = 1;
+        else
+            tourjoueur = 2;
+        console.log(tourjoueur);
     });
 
     socket.on('click_resultat', (data)=> {
         document.getElementById("pointJoueur1").innerText = data.j1;
         document.getElementById("pointJoueur2").innerText = data.j2;
         document.getElementById('joueurQuiDoitJouer').innerText = data.tour + "";
+        tour = data.tour;
         for (let i=0; i<10; i++)
             document.getElementById("img_case" + i).src = 'images/' + data.cases[i] + 'bille.jpg';
     });
 
     socket.on('log', (message) => console.log(message));
     let nom = prompt('Quel est votre pseudo ?');
-    console.log(nom);
     init(nom);
 </script>
 </body>

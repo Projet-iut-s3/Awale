@@ -18,13 +18,14 @@ class Jeu {
     }
 
     jouer(j, cote) {
-        if(cote!==this._tour)
+        console.log(this._tour, cote+1);
+        if(cote+1!==this._tour)
             return -1; // Ce n'est pas a lui de jouer;
         let point = this._plateau.jouerCase(j, cote);
         if(point===-1)
             return -1;
-        this._tour = (this._tour + 1) % 2;
-        if(this._tour===0) // on a change le tour
+        this._tour = this._tour % 2 + 1;
+        if(this._tour===1) // on a change le tour
             this._j2.ajouterPoint(point);
         else
             this._j1.ajouterPoint(point);
