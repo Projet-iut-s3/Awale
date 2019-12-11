@@ -8,7 +8,7 @@ export class IHM {
     constructor() {
         let j1 = new JoueurHumain("sam", 1);
         let j2 = new JoueurHumain("uel", 1);
-        this.jeu = new Jeu(j1, j2, 0);
+        this.jeu = new Jeu(j1, j2, 0, [[1,0,0,0,0,0],[4,1,1,1,1,1]]);
         this.tour = 1;
         this.fini = false;
     }
@@ -71,7 +71,8 @@ export class IHM {
         for (let i=0; i<2*nbcasejoueur; i++)
             document.getElementById("click_case"+i).onclick = () => ihm.click(i);
         document.getElementById("nomJoueur1").innerText = ihm.jeu.j1.pseudo;
-        document.getElementById("nomJoueur2").innerText = ihm.jeu.j2.pseudo;
+        document.getElementById("nomJoueur2").innerText = ihm.jeu.j2.pseudo
+        ihm.paint();
     }
 }
 

@@ -63,8 +63,9 @@ export class Plateau {
             let jcote = this.incrCases(j, cote, this.retirerGraine(j, cote));
             if(jcote[1]!==cote)
                 return this.gagnerpoint(jcote[0], jcote[1]);
+            return 0;
         }
-        return 0;
+        return -2;
     }
 
     getCase(i, j) {
